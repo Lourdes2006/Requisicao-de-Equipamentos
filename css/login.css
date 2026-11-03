@@ -1,0 +1,19 @@
+/* Styles for login page */
+body { display: flex; align-items: center; justify-content: center; height: 100vh; }
+.login-card {
+  width: 100%; max-width: 420px; padding: 40px; text-align: center;
+  background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px;
+  backdrop-filter: blur(16px); box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+.login-logo { font-size: 2rem; color: var(--accent-cyan); margin-bottom: 10px; }
+.login-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+.login-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px; }
+.btn-microsoft {
+  background: #ffffff; color: #111111; width: 100%; padding: 14px;
+  border-radius: 8px; font-weight: 600; display: flex; align-items: center;
+  justify-content: center; gap: 10px; cursor: pointer; border: none; transition: background 0.3s;
+}
+.btn-microsoft:hover { background: #e5e5e5; }
+#errorMessage { color: var(--danger); font-size: 0.85rem; margin-top: 15px; display: none; }
+
+#formLogin input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #334155;border-radius:9px;background:#fff;color:#111827;font-size:15px}#formLogin label{color:#cbd5e1;font-size:13px;font-weight:600}#errorMessage{margin-top:14px;color:#fca5a5;font-size:13px;display:none}#btnLoginFirebase{width:100%;margin-top:8px;cursor:pointer}#btnLoginFirebase:disabled{opacity:.6;cursor:wait}
