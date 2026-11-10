@@ -15,5 +15,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const DOMINIO_AUTORIZADO = "ebjc.pt";
-export const EMAIL_ADMIN = "O_TEU_EMAIL_DE_ADMINISTRADOR";
+export const DOMINIO_AUTORIZADO = "alunos.epbjc.pt";
+//export const EMAIL_ADMIN = "O_TEU_EMAIL_DE_ADMINISTRADOR";
