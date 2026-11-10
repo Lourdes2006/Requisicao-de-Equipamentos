@@ -43,4 +43,4 @@ import {onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/10.8.0/fire
 onAuthStateChanged(auth,user=>{if(!admin(user))return;const tb=el('tabelaDevolucoes');if(!tb)return;onSnapshot(collection(db,'requisicoes'),s=>{tb.replaceChildren();s.forEach(d=>{const p=d.data();if(!["Entregue"].includes(p.estado))return;const tr=celulas(document.createElement('tr'),[p.idPedido||d.id,p.aluno,p.equipamento,p.quantidade,p.estado]);const td=document.createElement('td'),b=document.createElement('button');b.className='btn';b.textContent='Registar devolução';b.onclick=async()=>{if(!confirm('Confirmar alteração?'))return;b.disabled=true;try{await runTransaction(db,async t=>{const r=doc(db,'requisicoes',d.id),snap=await t.get(r);if(!snap.exists()||!["Entregue"].includes(snap.data().estado))throw new Error('Estado do pedido alterado.');t.update(r,{estado:'Devolvido'})});alert('Registado com sucesso.')}catch(e){erro(e)}finally{b.disabled=false}};td.append(b);tr.append(td);tb.append(tr)})},erro)});
 
 
-é isso que tenho no app/js
+
