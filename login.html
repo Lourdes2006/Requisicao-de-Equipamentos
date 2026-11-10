@@ -29,39 +29,13 @@
       Portal de Requisição de Equipamentos
     </div>
 
-    <form id="formLogin">
+   <form id="formLogin">
+  <button id="btnLoginFirebase" type="submit">
+    <i class="fa-brands fa-microsoft"></i>
+    Entrar com Microsoft
+  </button>
+</form>
 
-      <label for="loginEmail">Email institucional</label>
+<div id="errorMessage" role="alert"></div>
 
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="nome@ebjc.pt"
-        autocomplete="username"
-        required
-      >
-
-      <label for="loginPassword">Palavra-passe</label>
-
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Introduz a tua palavra-passe"
-        autocomplete="current-password"
-        required
-      >
-
-      <button id="btnLoginFirebase" type="submit">
-        Entrar com Firebase
-      </button>
-
-    </form>
-
-    <div id="errorMessage" role="alert"></div>
-
-  </div>
-
-  <script type="module" src="js/app.js"></script>
-
-</body>
-</html>
+<script type="module" src="js/app.js"></script>
