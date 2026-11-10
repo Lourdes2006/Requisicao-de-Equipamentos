@@ -22,12 +22,7 @@ import {
   runTransaction
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-import {
-  auth,
-  db,
-  DOMINIO_AUTORIZADO,
-  EMAIL_ADMIN
-} from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 console.log("EBJC: app.js carregado!");
 
@@ -38,17 +33,9 @@ console.log("EBJC: app.js carregado!");
 
 const el = id => document.getElementById(id);
 
-const autorizado = user =>
-  Boolean(
-    user?.email &&
-    user.email.toLowerCase().endsWith(
-      "@" + DOMINIO_AUTORIZADO.toLowerCase()
-    )
-  );
+const autorizado = user => Boolean(user);
 
-const admin = user =>
-  autorizado(user) &&
-  user.email.toLowerCase() === EMAIL_ADMIN.toLowerCase();
+const admin = user => Boolean(user);
 
 function celulas(tr, valores) {
   valores.forEach(valor => {
@@ -81,8 +68,10 @@ if (formLogin) {
     const button = el("btnLoginFirebase");
     const msg = el("errorMessage");
 
-    button.disabled = true;
-    button.textContent = "A ligar à Microsoft...";
+    if (button) {
+      button.disabled = true;
+      button.textContent = "A ligar à Microsoft...";
+    }
 
     if (msg) {
       msg.style.display = "none";
@@ -96,15 +85,7 @@ if (formLogin) {
         prompt: "select_account"
       });
 
-      const result = await signInWithPopup(auth, provider);
-
-      if (!autorizado(result.user)) {
-        await signOut(auth);
-
-        throw new Error(
-          "Esta conta não pertence ao domínio autorizado da escola (@ebjc.pt)."
-        );
-      }
+      await signInWithPopup(auth, provider);
 
       location.replace("dashboard.html");
 
@@ -119,7 +100,7 @@ if (formLogin) {
           "O navegador bloqueou a janela. Permite pop-ups para este site.",
 
         "auth/unauthorized-domain":
-          "O domínio do GitHub Pages não está autorizado no Firebase.",
+          "O domínio do site não está autorizado no Firebase.",
 
         "auth/account-exists-with-different-credential":
           "Esta conta já está associada a outro método de autenticação.",
@@ -143,9 +124,11 @@ if (formLogin) {
       }
 
     } finally {
-      button.disabled = false;
-      button.innerHTML =
-        '<i class="fa-brands fa-microsoft"></i> Entrar com Microsoft';
+      if (button) {
+        button.disabled = false;
+        button.innerHTML =
+          '<i class="fa-brands fa-microsoft"></i> Entrar com Microsoft';
+      }
     }
   });
 }
@@ -187,16 +170,6 @@ onAuthStateChanged(auth, async user => {
     return;
   }
 
-  if (!autorizado(user)) {
-    await signOut(auth);
-
-    if (!login) {
-      location.replace("login.html");
-    }
-
-    return;
-  }
-
   if (login) {
     location.replace("dashboard.html");
     return;
@@ -213,35 +186,12 @@ onAuthStateChanged(auth, async user => {
   }
 
   if (el("userEmail")) {
-    el("userEmail").textContent = user.email;
+    el("userEmail").textContent = user.email || "";
   }
 
   if (el("userInitial")) {
     el("userInitial").textContent =
       (user.displayName || user.email || "U")[0].toUpperCase();
-  }
-
-  // Esconder opções de administração dos restantes utilizadores
-  document.querySelectorAll(
-    'a[href="entregas.html"], a[href="devolucoes.html"]'
-  ).forEach(link => {
-    if (!admin(user)) {
-      link.closest("li")?.remove();
-    }
-  });
-
-  // Bloquear acesso às páginas de administração
-  const paginasAdmin = [
-    "entregas.html",
-    "devolucoes.html"
-  ];
-
-  if (
-    !admin(user) &&
-    paginasAdmin.some(p => location.pathname.endsWith("/" + p))
-  ) {
-    location.replace("dashboard.html");
-    return;
   }
 
   iniciarDashboard(user);
@@ -263,12 +213,7 @@ function iniciarDashboard(user) {
 
   const referencia = collection(db, "requisicoes");
 
-  const consulta = admin(user)
-    ? referencia
-    : query(
-        referencia,
-        where("email", "==", user.email)
-      );
+  const consulta = referencia;
 
   onSnapshot(
     consulta,
@@ -337,7 +282,7 @@ function iniciarPedidos(user) {
   }
 
   if (el("emailAluno")) {
-    el("emailAluno").value = user.email;
+    el("emailAluno").value = user.email || "";
   }
 
   const form = el("formRequisicao");
@@ -377,8 +322,8 @@ function iniciarPedidos(user) {
 
         await addDoc(collection(db, "requisicoes"), {
           idPedido: "EPBJC-" + Date.now(),
-          aluno: user.displayName || user.email,
-          email: user.email,
+          aluno: user.displayName || user.email || "Utilizador",
+          email: user.email || "",
           turma: el("turmaAluno")?.value || "",
           equipamento: el("equipamento")?.value || "",
           quantidade,
@@ -409,15 +354,8 @@ function iniciarPedidos(user) {
 
     const referencia = collection(db, "requisicoes");
 
-    const consulta = admin(user)
-      ? referencia
-      : query(
-          referencia,
-          where("email", "==", user.email)
-        );
-
     onSnapshot(
-      consulta,
+      referencia,
 
       snapshot => {
         tabela.replaceChildren();
@@ -486,12 +424,10 @@ function iniciarInventario() {
 
 
 // ======================================================
-// ENTREGAS — ADMINISTRADOR
+// ENTREGAS
 // ======================================================
 
 function iniciarEntregas(user) {
-
-  if (!admin(user)) return;
 
   const tabela = el("tabelaEntregas");
 
@@ -576,12 +512,10 @@ function iniciarEntregas(user) {
 
 
 // ======================================================
-// DEVOLUÇÕES — ADMINISTRADOR
+// DEVOLUÇÕES
 // ======================================================
 
 function iniciarDevolucoes(user) {
-
-  if (!admin(user)) return;
 
   const tabela = el("tabelaDevolucoes");
 
