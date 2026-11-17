@@ -10,7 +10,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { firebaseConfig } from "./firebase-config.js";
 
-const ALLOWED_DOMAIN = "@alunos.epbjc.pt";
+const ALLOWED_DOMAIN = "alunos.epbjc.pt";
 const DASHBOARD_URL = "./dashboard.html";
 
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
