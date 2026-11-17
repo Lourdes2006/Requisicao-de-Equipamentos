@@ -23,7 +23,7 @@ provider.setCustomParameters({
   prompt: "select_account",
   tenant: TENANT_ID
 });
-provider.setCustomParameters({ prompt: "select_account" });
+
 provider.addScope("openid");
 provider.addScope("profile");
 provider.addScope("email");
