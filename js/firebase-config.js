@@ -1,5 +1,5 @@
-// Preenche com os dados da tua aplicação Web no Firebase.
-// Firebase Console > Definições do projeto > Geral > As tuas aplicações > Aplicação Web.
+// Preenche com a configuração da aplicação Web no Firebase Console.
+// Projeto Firebase > Definições do projeto > Geral > As tuas aplicações > Web.
 export const firebaseConfig = {
   apiKey: "COLOCA_AQUI_A_API_KEY",
   authDomain: "COLOCA_AQUI.firebaseapp.com",
