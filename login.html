@@ -15,15 +15,16 @@
     <div class="login-subtitle">Portal de Requisição de Equipamentos</div>
 
     <div style="margin-top:22px">
-      <button class="btn-microsoft" id="btnLoginMicrosoft" type="button">
-        <i class="fa-brands fa-microsoft" aria-hidden="true"></i>
-        Entrar com conta Microsoft
-      </button>
-    </div>
-    <p id="errorMessage" role="alert" aria-live="polite"></p>
-  </main>
+      <button
+  class="btn-microsoft"
+  id="btnLoginMicrosoft"
+  type="button"
+>
+  Entrar com conta Microsoft
+</button>
 
-  <!-- O módulo trata exclusivamente do início de sessão Microsoft. -->
-  <script type="module" src="js/microsoft-auth.js"></script>
+<div id="errorMessage" role="alert"></div>
+
+<script type="module" src="js/microsoft-auth.js"></script>
 </body>
 </html>
