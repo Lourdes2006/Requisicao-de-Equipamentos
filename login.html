@@ -13,17 +13,12 @@
     <div class="login-logo"><i class="fa-solid fa-microchip"></i></div>
     <div class="login-title">EBJC EQUIPAMENTOS</div>
     <div class="login-subtitle">Portal de Requisição de Equipamentos</div>
-  
-    <button class="btn-microsoft" id="btnLoginMicrosoft" type="button">
-      <i class="fa-brands fa-microsoft"></i>
-      Entrar com Microsoft
-    </button>
-
-    <div id="errorMessage" role="alert"></div>
+    
+    <form id="formLogin" style="display:grid;gap:12px;text-align:left;margin-top:22px"><label for="loginEmail">Email institucional</label><input id="loginEmail" type="email" autocomplete="username" placeholder="nome@escola.pt" required><label for="loginPassword">Palavra-passe</label><input id="loginPassword" type="password" autocomplete="current-password" minlength="6" required><button class="btn-microsoft" id="btnLoginFirebase" type="submit">Entrar com Firebase</button></form>
+    <div id="errorMessage"></div>
   </div>
 
+  
   <script type="module" src="js/app.js"></script>
 </body>
 </html>
-
-
