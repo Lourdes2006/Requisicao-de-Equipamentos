@@ -9,6 +9,8 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const microsoftProvider = new OAuthProvider("microsoft.com");
+
+ // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyC7JJgoIaz5VSm-3mYKrWSsujLjSnaUyMs",
   authDomain: "teste-epbjc-c022b.firebaseapp.com",
