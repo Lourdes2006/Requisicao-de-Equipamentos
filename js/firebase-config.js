@@ -1,10 +1,10 @@
-// Preenche com a configuração da aplicação Web no Firebase Console.
-// Projeto Firebase > Definições do projeto > Geral > As tuas aplicações > Web.
-export const firebaseConfig = {
-  apiKey: "COLOCA_AQUI_A_API_KEY",
-  authDomain: "COLOCA_AQUI.firebaseapp.com",
-  projectId: "COLOCA_AQUI",
-  storageBucket: "COLOCA_AQUI.firebasestorage.app",
-  messagingSenderId: "COLOCA_AQUI",
-  appId: "COLOCA_AQUI"
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC7JJgoIaz5VSm-3mYKrWSsujLjSnaUyMs",
+  authDomain: "teste-epbjc-c022b.firebaseapp.com",
+  projectId: "teste-epbjc-c022b",
+  storageBucket: "teste-epbjc-c022b.firebasestorage.app",
+  messagingSenderId: "526937413785",
+  appId: "1:526937413785:web:3d825c5146a1ab9b300008",
+  measurementId: "G-972X01LRXF"
 };
