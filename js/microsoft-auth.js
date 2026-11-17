@@ -15,8 +15,14 @@ const DASHBOARD_URL = "./dashboard.html";
 
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const TENANT_ID = "4334e4b0-48f4-4a76-ae54-cec847437a72";
+
 const provider = new OAuthProvider("microsoft.com");
 
+provider.setCustomParameters({
+  prompt: "select_account",
+  tenant: TENANT_ID
+});
 provider.setCustomParameters({ prompt: "select_account" });
 provider.addScope("openid");
 provider.addScope("profile");
