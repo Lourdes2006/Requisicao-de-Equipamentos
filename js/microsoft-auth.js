@@ -44,7 +44,8 @@ function setBusy(busy) {
 }
 
 function hasInstitutionalDomain(user) {
-  return (user?.email || "").trim().toLowerCase().endsWith(ALLOWED_DOMAIN);
+  const email = (user?.email || "").trim().toLowerCase();
+  return email.endsWith("@" + ALLOWED_DOMAIN);
 }
 
 async function validateAndContinue(user) {
