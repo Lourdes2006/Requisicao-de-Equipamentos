@@ -1,0 +1,29 @@
+// Exemplo inicial de regras Firestore.
+// ATENÇÃO: substitui ADMIN_EMAILS pelos emails reais dos responsáveis.
+// A validação no navegador não é segurança; estas regras são indispensáveis.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.matches('.*@alunos\\.epbjc\\.pt$');
+    }
+    function isAdmin() {
+      return signedIn() && request.auth.token.email in [
+        'COLOCA_AQUI_O_EMAIL_DO_ADMIN@epbjc.pt'
+      ];
+    }
+    match /requisicoes/{requestId} {
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.estado == 'Pendente';
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['estado', 'atualizadoEm']);
+      allow delete: if isAdmin();
+    }
+  }
+}
