@@ -17,3 +17,10 @@ body { display: flex; align-items: center; justify-content: center; height: 100v
 #errorMessage { color: var(--danger); font-size: 0.85rem; margin-top: 15px; display: none; }
 
 #formLogin input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #334155;border-radius:9px;background:#fff;color:#111827;font-size:15px}#formLogin label{color:#cbd5e1;font-size:13px;font-weight:600}#errorMessage{margin-top:14px;color:#fca5a5;font-size:13px;display:none}#btnLoginFirebase{width:100%;margin-top:8px;cursor:pointer}#btnLoginFirebase:disabled{opacity:.6;cursor:wait}
+
+.login-hint { color: var(--text-muted); font-size: .8rem; margin-top: 16px; }
+#errorMessage { display: none; }
+.btn-microsoft:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 480px) {
+  .login-card { width: calc(100% - 32px); padding: 28px 22px; }
+}

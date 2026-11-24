@@ -245,3 +245,16 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--accent-cyan);
   box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
 }
+
+button:disabled { opacity: .6; cursor: wait; }
+[hidden] { display: none !important; }
+@media (max-width: 850px) {
+  body { height: auto; min-height: 100vh; overflow: auto; flex-direction: column; }
+  .sidebar { width: 100%; padding: 14px; }
+  .sidebar-menu { flex-direction: row; flex-wrap: wrap; }
+  .sidebar-menu a { padding: 9px 10px; font-size: .82rem; }
+  .main-content { overflow: visible; }
+  .topbar { padding: 12px 18px; height: auto; min-height: 64px; }
+  .container { padding: 18px; overflow-x: auto; }
+  table { min-width: 650px; }
+}
